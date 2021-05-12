@@ -1,16 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import {getInitialData} from '../utils/api'
+import {getInitialDataApi, answerQuestionApi} from '../utils/api'
 import { setAuthedUser } from "../actions/authedUser";
 import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
-
+import { ANSWER_QUESTION } from "../actions/questions";
+import {FETCH_DATA_REQUESTED} from '../actions/shared'
 
 const AUTHED_ID = "tylermcginnis";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action) {
+function* fetchDataSaga() {
    try {
-      const {users, questions} = yield call(getInitialData);
+      const {users, questions} = yield call(getInitialDataApi);
       yield put(receiveUsers(users));
       yield put(receiveQuestions(questions));
       yield put(setAuthedUser(AUTHED_ID));
@@ -19,9 +20,19 @@ function* fetchUser(action) {
    }
 }
 
+function* answerQuestionSaga(action) {
+   try {
+      const {authedUser, qid, answer} = action
+      yield call(answerQuestionApi,authedUser, qid, answer);
+   } catch (e) {
+      console.log(e)
+      yield put({type: "ANSWER_QUESTION_FAILED", message: e.message});
+   }
+}
 
 function* sagas() {
-  yield takeLatest("FETCH_DATA_REQUESTED", fetchUser);
+   yield takeLatest(FETCH_DATA_REQUESTED, fetchDataSaga);
+   yield takeLatest(ANSWER_QUESTION, answerQuestionSaga);
 }
 
 export default sagas;
