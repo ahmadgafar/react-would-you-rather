@@ -11,8 +11,7 @@ export function receiveQuestions(questions) {
   };
 }
 
-
-export function answerQuestion(authedUser, qid, answer ) {
+export function answerQuestion(authedUser, qid, answer) {
   return {
     type: ANSWER_QUESTION,
     qid,
@@ -21,7 +20,7 @@ export function answerQuestion(authedUser, qid, answer ) {
   };
 }
 
-export function handelAnswerQuestion(authedUser, qid, answer ) {
+export function handelAnswerQuestion(authedUser, qid, answer) {
   return {
     type: HANDEL_ANSWER_QUESTION,
     qid,
@@ -30,18 +29,17 @@ export function handelAnswerQuestion(authedUser, qid, answer ) {
   };
 }
 
-
 export function saveQuestion(optionOneText, optionTwoText, author) {
-  let question = {optionOneText, optionTwoText, author}
+  let question = { optionOneText, optionTwoText, author };
   return {
     type: SAVE_QUESTION,
-    question
+    question,
   };
 }
 
 export function handelSaveQuestion(question) {
   return {
     type: HANDEL_SAVE_QUESTION,
-    question
+    question,
   };
 }

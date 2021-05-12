@@ -1,4 +1,9 @@
-import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from "./data.js";
+import {
+  _getUsers,
+  _getQuestions,
+  _saveQuestionAnswer,
+  _saveQuestion,
+} from "./data.js";
 
 export function getInitialDataApi() {
   return Promise.all([_getUsers(), _getQuestions()]).then(
@@ -10,9 +15,8 @@ export function getInitialDataApi() {
 }
 
 export function answerQuestionApi(authedUser, qid, answer) {
-    return _saveQuestionAnswer({ authedUser, qid, answer });
+  return _saveQuestionAnswer({ authedUser, qid, answer });
 }
-
 
 export function saveQuestionApi(question) {
   return _saveQuestion(question);

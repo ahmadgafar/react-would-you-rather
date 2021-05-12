@@ -27,7 +27,7 @@ export default function questions(state = {}, action) {
       let { question } = action;
       return {
         ...state,
-        [question.id] : question,
+        [question.id]: question,
       };
     default:
       return state;

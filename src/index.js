@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware, { sagaMiddleware } from "./middleware";
-import  sagas  from "./middleware/sagas";
+import sagas from "./middleware/sagas";
 
 const store = createStore(reducer, middleware);
 
