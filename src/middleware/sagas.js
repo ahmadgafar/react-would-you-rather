@@ -2,8 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import {getInitialDataApi, answerQuestionApi} from '../utils/api'
 import { setAuthedUser } from "../actions/authedUser";
 import { receiveUsers } from "../actions/users";
-import { receiveQuestions } from "../actions/questions";
-import { ANSWER_QUESTION } from "../actions/questions";
+import { receiveQuestions, handelAnswerQuestion, ANSWER_QUESTION } from "../actions/questions";
 import {FETCH_DATA_REQUESTED} from '../actions/shared'
 
 const AUTHED_ID = "tylermcginnis";
@@ -24,6 +23,7 @@ function* answerQuestionSaga(action) {
    try {
       const {authedUser, qid, answer} = action
       yield call(answerQuestionApi,authedUser, qid, answer);
+      yield put(handelAnswerQuestion(authedUser, qid, answer));
    } catch (e) {
       console.log(e)
       yield put({type: "ANSWER_QUESTION_FAILED", message: e.message});

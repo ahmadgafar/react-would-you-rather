@@ -10,5 +10,5 @@ export function getInitialDataApi() {
 }
 
 export function answerQuestionApi(authedUser, qid, answer) {
-  return _saveQuestionAnswer({ authedUser, qid, answer });
+    return _saveQuestionAnswer({ authedUser, qid, answer });
 }
