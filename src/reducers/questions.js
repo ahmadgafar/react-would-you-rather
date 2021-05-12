@@ -1,4 +1,8 @@
-import { RECEIVE_QUESTIONS, HANDEL_ANSWER_QUESTION, SAVE_QUESTION } from "../actions/questions";
+import {
+  RECEIVE_QUESTIONS,
+  HANDEL_ANSWER_QUESTION,
+  HANDEL_SAVE_QUESTION,
+} from "../actions/questions";
 
 export default function questions(state = {}, action) {
   switch (action.type) {
@@ -19,9 +23,12 @@ export default function questions(state = {}, action) {
           [answer]: temp,
         },
       };
-      case SAVE_QUESTION:
-
-      return {state};
+    case HANDEL_SAVE_QUESTION:
+      let { question } = action;
+      return {
+        ...state,
+        [question.id] : question,
+      };
     default:
       return state;
   }

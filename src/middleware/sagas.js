@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import {getInitialDataApi, answerQuestionApi} from '../utils/api'
+import {getInitialDataApi, answerQuestionApi, saveQuestionApi} from '../utils/api'
 import { setAuthedUser } from "../actions/authedUser";
 import { receiveUsers } from "../actions/users";
-import { receiveQuestions, handelAnswerQuestion, ANSWER_QUESTION } from "../actions/questions";
+import { receiveQuestions, handelAnswerQuestion, handelSaveQuestion, SAVE_QUESTION,  ANSWER_QUESTION } from "../actions/questions";
 import {FETCH_DATA_REQUESTED} from '../actions/shared'
 
 const AUTHED_ID = "tylermcginnis";
@@ -30,9 +30,21 @@ function* answerQuestionSaga(action) {
    }
 }
 
+function* saveQuestionSaga(action) {
+   try {
+      const {question} = action
+      const result = yield call(saveQuestionApi,question);
+      yield put(handelSaveQuestion(result));
+   } catch (e) {
+      console.log(e)
+      yield put({type: "ANSWER_QUESTION_FAILED", message: e.message});
+   }
+}
+
 function* sagas() {
    yield takeLatest(FETCH_DATA_REQUESTED, fetchDataSaga);
    yield takeLatest(ANSWER_QUESTION, answerQuestionSaga);
+   yield takeLatest(SAVE_QUESTION, saveQuestionSaga);
 }
 
 export default sagas;

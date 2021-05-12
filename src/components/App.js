@@ -2,7 +2,7 @@ import "../index.css";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import {handleInitialData} from "../actions/shared"
-import {answerQuestion} from "../actions/questions"
+import {saveQuestion} from "../actions/questions"
 
 function App (props) {
   const {dispatch} = props;
@@ -12,7 +12,7 @@ function App (props) {
   }, [dispatch]);
 
   const handleClick = () =>{
-    dispatch(answerQuestion('tylermcginnis', '6ni6ok3ym7mf1p33lnez', 'optionOne'));
+    dispatch(saveQuestion('optionOneText', 'optionTwoText', "tylermcginnis"));
   }
 
   return (
