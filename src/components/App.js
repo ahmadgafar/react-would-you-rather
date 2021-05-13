@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 import { saveQuestion } from "../actions/questions";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
 
 function App(props) {
   const { dispatch } = props;
@@ -16,10 +18,8 @@ function App(props) {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <div>
-        <button onClick={handleClick}>test</button>
-      </div>
+      {/* <button onClick={handleClick}>test</button> */}
+      <Login></Login>{" "}
     </div>
   );
 }
