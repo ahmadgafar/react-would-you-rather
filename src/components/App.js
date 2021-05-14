@@ -5,6 +5,8 @@ import { handleInitialData } from "../actions/shared";
 import { saveQuestion } from "../actions/questions";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import NavBar from "./NavBar";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App(props) {
   const { dispatch } = props;
@@ -17,10 +19,17 @@ function App(props) {
   };
 
   return (
-    <div className="App">
-      {/* <button onClick={handleClick}>test</button> */}
-      <Login></Login>{" "}
-    </div>
+    <Router>
+      <div className="container">
+        {/* <NavBar /> */}
+        <div>
+          <Route path="/" component={NavBar} />
+          <Route path="/login" component={Login} />
+          <Route path="/dashboard" component={Dashboard} />
+        </div>
+      </div>
+      <div></div>
+    </Router>
   );
 }
 

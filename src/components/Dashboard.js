@@ -13,27 +13,29 @@ function Dashboard(props) {
   // };
   return (
     <div>
-      <h3>users</h3>
-      <ul>
-      {(props.users) ? props.users.map((user) => (
-          <li key={user.id}>
-            <User user={user} />
-          </li>
-        )) : "loading    "}
+      <h3 className='center'>Users Ranking </h3>
+      <ul className='center'>
+        {props.users
+          ? props.users.map((user) => (
+              <li key={user.id}>
+                <User user={user} />
+              </li>
+            ))
+          : "loading    "}
       </ul>
     </div>
   );
 }
 
-function mapStateToProps({ users }) {
+const mapStateToProps = ({ users }) => {
   if (JSON.stringify(users) !== "{}")
     return {
       users: Object.values(users).sort(
-        (b, a) => 
-          (a.questions.length +
-            Object.keys(a.answers).length) -
+        (b, a) =>
+          a.questions.length +
+          Object.keys(a.answers).length -
           (b.questions.length + Object.keys(b.answers).length)
       ),
     };
-}
+};
 export default connect(mapStateToProps)(Dashboard);

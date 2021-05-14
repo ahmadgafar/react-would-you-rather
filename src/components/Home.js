@@ -22,7 +22,7 @@ function Login(props) {
 
   return (
     <div>
-      <select value="" onChange={changefunction}>
+      <select value={null} onChange={changefunction}>
         { (props.users) != undefined
           ? props.users.map((user) => (
               <option key={user.id} value={user.id}>

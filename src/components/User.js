@@ -10,13 +10,17 @@ function User(props) {
   // const handleClick = () => {
   //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
   // };
-  console.log(props)
+  console.log(props);
   return (
     <div>
-    {props.user.id}
+      <div>
+        {props.user.id} Total score:{" "}
+        {Object.keys(props.user.answers).length + props.user.questions.length}
+      </div>
+      <div>Questions asked: {props.user.questions.length}</div>
+      <div>Questions answered: {Object.keys(props.user.answers).length}</div>
     </div>
   );
 }
-
 
 export default connect()(User);
