@@ -1,17 +1,11 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React, { Component, useEffect } from "react";
+import React from "react";
 import { setAuthedUser } from "../actions/authedUser";
 
 function Login(props) {
   const { dispatch } = props;
-  // useEffect(() => {
-  //   dispatch(handleInitialData());
-  // }, [dispatch]);
 
-  // const handleClick = () => {
-  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  // };
   const changefunction = (event) => {
     dispatch(
       setAuthedUser(
@@ -23,7 +17,7 @@ function Login(props) {
   return (
     <div>
       <select value="" onChange={changefunction}>
-        { (props.users) != undefined
+        { (props.users) !== undefined
           ? props.users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}

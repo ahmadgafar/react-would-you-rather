@@ -1,16 +1,9 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React, { Component, useEffect } from "react";
+import React from "react";
 
 function User(props) {
-  // useEffect(() => {
-  //   dispatch(handleInitialData());
-  // }, [dispatch]);
 
-  // const handleClick = () => {
-  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  // };
-  console.log(props);
   return (
     <div>
       <div>

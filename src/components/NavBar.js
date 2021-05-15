@@ -14,7 +14,7 @@ function NavBar(props) {
         </li>
         <li>
           <NavLink to="/new" activeClassName="active">
-            New Tweet
+            New Question
           </NavLink>
         </li>
 
@@ -24,16 +24,15 @@ function NavBar(props) {
           </NavLink>
         </li>
       </ul>
-      <i> welcome <b>{props.authedUserName} </b> !</i>
+      <i>
+        Welcome <b>{props.authedUserName} </b> !
+      </i>
     </nav>
   );
 }
 
 const mapStateToProps = ({ authedUser, users }) => {
   if (JSON.stringify(users) !== "{}" && authedUser !== null) {
-    console.log(JSON.stringify(authedUser));
-    console.log(users);
-    console.log(users[authedUser].name);
     return { authedUserName: users[authedUser].name };
   }
 };

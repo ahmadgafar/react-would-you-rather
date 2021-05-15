@@ -1,16 +1,10 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React, { Component, useEffect } from "react";
+import React from "react";
 import User from "./User";
 
 function Dashboard(props) {
-  // useEffect(() => {
-  //   dispatch(handleInitialData());
-  // }, [dispatch]);
 
-  // const handleClick = () => {
-  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  // };
   return (
     <div>
       <h3 className='center'>Users Ranking </h3>

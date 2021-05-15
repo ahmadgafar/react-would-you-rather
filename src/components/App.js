@@ -2,11 +2,11 @@ import "../index.css";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
-import { saveQuestion } from "../actions/questions";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import NewQuestion from "./NewQuestion";
 import NavBar from "./NavBar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router,Route } from "react-router-dom";
 
 function App(props) {
   const { dispatch } = props;
@@ -14,9 +14,9 @@ function App(props) {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  const handleClick = () => {
-    dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  };
+  // const handleClick = () => {
+  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
+  // };
 
   return (
     <Router>
@@ -25,6 +25,7 @@ function App(props) {
         <div>
           <Route path="/" component={NavBar} />
           <Route path="/login" component={Login} />
+          <Route path="/new" component={NewQuestion} />
           <Route path="/dashboard" component={Dashboard} />
         </div>
       </div>
