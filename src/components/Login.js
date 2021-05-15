@@ -6,18 +6,22 @@ import { setAuthedUser } from "../actions/authedUser";
 function Login(props) {
   const { dispatch } = props;
 
-  const changefunction = (event) => {
+  const changefunction = (e) => {
+    e.preventDefault();
+    if (e.target.value === "Select user:") return;
     dispatch(
       setAuthedUser(
-        props.users.filter((user) => user.id === event.target.value)[0].id
+        props.users.filter((user) => user.id === e.target.value)[0].id
       )
     );
   };
 
   return (
     <div>
-      <select value="" onChange={changefunction}>
-        { (props.users) !== undefined
+      <select onChange={changefunction}>
+        <option value="Select user:">Select user:</option>
+
+        {props.users !== undefined
           ? props.users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}

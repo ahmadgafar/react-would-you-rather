@@ -8,7 +8,7 @@ function User(props) {
     <div>
       <div>
         {props.user.id} Total score:{" "}
-        {Object.keys(props.user.answers).length + props.user.questions.length}
+        <b style={ { color: 'red'} }>{Object.keys(props.user.answers).length + props.user.questions.length}</b>
       </div>
       <div>Questions asked: {props.user.questions.length}</div>
       <div>Questions answered: {Object.keys(props.user.answers).length}</div>

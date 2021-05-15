@@ -26,6 +26,7 @@ function NavBar(props) {
       </ul>
       <i>
         Welcome <b>{props.authedUserName} </b> !
+        <img src={props.authedUseravatarURL} alt="" width="40" height="40"></img>
       </i>
     </nav>
   );
@@ -33,7 +34,8 @@ function NavBar(props) {
 
 const mapStateToProps = ({ authedUser, users }) => {
   if (JSON.stringify(users) !== "{}" && authedUser !== null) {
-    return { authedUserName: users[authedUser].name };
+    return { authedUserName: users[authedUser].name ,
+      authedUseravatarURL: users[authedUser].avatarURL };
   }
 };
 
