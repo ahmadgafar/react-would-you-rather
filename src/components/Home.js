@@ -1,50 +1,80 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React, { Component, useEffect } from "react";
-import { setAuthedUser } from "../actions/authedUser";
+import React, { useState } from "react";
+import QuestionAnswer from "./QuestionAnswer";
+import QuestionView from "./QuestionView";
 
-function Login(props) {
-  const { dispatch } = props;
-  // useEffect(() => {
-  //   dispatch(handleInitialData());
-  // }, [dispatch]);
+const UN_ANSWERED_QUESTIONS = "UN_ANSWERED_QUESTIONS";
+const ANSWERED_QUESTIONS = "ANSWERED_QUESTIONS";
 
-  // const handleClick = () => {
-  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  // };
-  const changefunction = (event) => {
-    dispatch(
-      setAuthedUser(
-        props.users.filter((user) => user.id === event.target.value)[0].id
-      )
-    );
+function Home(props) {
+  const [currentView, setcurrentView] = useState(UN_ANSWERED_QUESTIONS);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (currentView === UN_ANSWERED_QUESTIONS)
+      setcurrentView(ANSWERED_QUESTIONS);
+    else setcurrentView(UN_ANSWERED_QUESTIONS);
   };
-
   return (
     <div>
-      <select value={null} onChange={changefunction}>
-        { (props.users) != undefined
-          ? props.users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.name}
-              </option>
+      {" "}
+      {props.unansweredQuestions ? (
+        <div>
+          <button onClick={handleClick}>
+            {" "}
+            Switch to{" "}
+            {currentView === UN_ANSWERED_QUESTIONS
+              ? "answered questions"
+              : "un-answered questions"}
+          </button>
+          {currentView === UN_ANSWERED_QUESTIONS ? (
+            props.unansweredQuestions.length === 0 ? (
+              <b style={{ color: "red" }}>no un-aswered questions</b>
+            ) : (
+              props.unansweredQuestions.map((question) => (
+                <li key={question[0]}>
+                  <QuestionAnswer
+                    question={question[1]}
+                    avatarURL={props.users[question[1].author].avatarURL}
+                  />
+                </li>
+              ))
+            )
+          ) : (
+            
+            props.answeredQuestions.map((question) => (
+              <li key={question[0]}>
+                <QuestionView question={question[1]} user={props.users[props.authedUser]} />
+              </li>
             ))
-          : "loading    "}
-      </select>
+          )}
+        </div>
+      ) : (
+        "loading"
+      )}
     </div>
   );
 }
 
-function mapStateToProps({ users }) {
-  if (JSON.stringify(users) !== "{}")
+function mapStateToProps({ authedUser, users, questions }) {
+  if (
+    JSON.stringify(questions) !== "{}" &&
+    JSON.stringify(users) !== "{}" &&
+    authedUser !== null
+  ) {
     return {
-      users: Object.values(users).sort(
-        (b, a) =>
-          a.questions.length +
-          Object.keys(a.answers).length -
-          (b.questions.length + Object.keys(b.answers).length)
+      answeredQuestions: Object.entries(questions).filter(
+        ([key, value]) => key in users[authedUser].answers
       ),
+
+      unansweredQuestions: Object.entries(questions).filter(
+        ([key, value]) => !(key in users[authedUser].answers)
+      ),
+      users,
+      authedUser,
     };
+  }
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Home);

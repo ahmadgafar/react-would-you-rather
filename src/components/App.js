@@ -7,6 +7,7 @@ import Login from "./Login";
 import NewQuestion from "./NewQuestion";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router,Route } from "react-router-dom";
+import Home from "./Home";
 
 function App(props) {
   const { dispatch } = props;
@@ -14,19 +15,15 @@ function App(props) {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  // const handleClick = () => {
-  //   dispatch(saveQuestion("optionOneText", "optionTwoText", "tylermcginnis"));
-  // };
-
   return (
     <Router>
       <div className="container">
-        {/* <NavBar /> */}
         <div>
           <Route path="/" component={NavBar} />
           <Route path="/login" component={Login} />
-          <Route path="/new" component={NewQuestion} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/home" component={Home} />
+          <Route path="/add" component={NewQuestion} />
+          <Route path="/leaderboard" component={Dashboard} />
         </div>
       </div>
       <div></div>
