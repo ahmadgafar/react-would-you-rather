@@ -1,8 +1,7 @@
 import "../index.css";
 import { connect } from "react-redux";
 import React, { useState } from "react";
-import QuestionAnswer from "./QuestionAnswer";
-import QuestionView from "./QuestionView";
+import QuestionBase from "./QuestionBase";
 import { useHistory } from "react-router-dom";
 
 const UN_ANSWERED_QUESTIONS = "UN_ANSWERED_QUESTIONS";
@@ -11,7 +10,7 @@ const ANSWERED_QUESTIONS = "ANSWERED_QUESTIONS";
 function Home(props) {
   const [currentView, setcurrentView] = useState(UN_ANSWERED_QUESTIONS);
   const history = useHistory();
-  const {authedUser, unansweredQuestions, answeredQuestions, users} = props
+  const { authedUser, unansweredQuestions, answeredQuestions } = props;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -25,15 +24,14 @@ function Home(props) {
     history.push("/login");
   };
 
-
   return (
     <div>
-      { authedUser == null ? (
+      {authedUser == null ? (
         handleNoAuthedUser()
       ) : (
         <div>
           {" "}
-          { unansweredQuestions ? (
+          {unansweredQuestions ? (
             <div>
               <button onClick={handleClick}>
                 {" "}
@@ -43,24 +41,19 @@ function Home(props) {
                   : "un-answered questions"}
               </button>
               {currentView === UN_ANSWERED_QUESTIONS ? (
-                 unansweredQuestions.length === 0 ? (
+                unansweredQuestions.length === 0 ? (
                   <b style={{ color: "red" }}>no un-aswered questions</b>
                 ) : (
-                   unansweredQuestions.map((question) => (
+                  unansweredQuestions.map((question) => (
                     <li key={question[0]}>
-                      <QuestionAnswer
-                        question={question[1]}
-                      />
+                      <QuestionBase answered={true} question={question[1]} />
                     </li>
                   ))
                 )
               ) : (
-                 answeredQuestions.map((question) => (
+                answeredQuestions.map((question) => (
                   <li key={question[0]}>
-                    <QuestionView
-                      question={question[1]}
-                      user={ users[ authedUser]}
-                    />
+                    <QuestionBase answered={false} question={question[1]} />
                   </li>
                 ))
               )}
@@ -95,7 +88,6 @@ function mapStateToProps({ authedUser, users, questions }) {
     return {
       answeredQuestions: answeredQuestions,
       unansweredQuestions: unansweredQuestions,
-      users,
       authedUser,
     };
   }

@@ -9,6 +9,7 @@ import QuestionAnswer from "./QuestionAnswer";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router,Route } from "react-router-dom";
 import Home from "./Home";
+import QuestionBase from "./QuestionBase";
 
 function App(props) {
   const { dispatch } = props;
@@ -25,7 +26,7 @@ function App(props) {
           <Route path="/home" component={Home} />
           <Route path="/add" component={NewQuestion} />
           <Route path="/leaderboard" component={Dashboard} />
-          <Route path='/question/:id' component={QuestionAnswer} />
+          <Route path='/question/:id' component={QuestionBase} />
         </div>
       </div>
       <div></div>
