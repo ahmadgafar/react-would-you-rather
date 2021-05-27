@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import React from "react";
 
 function User(props) {
+  const {user} = props;
+
   return (
     <div>
       <div>
-        {props.user.id} Total score:{" "}
+        { user.id} Total score:{" "}
         <b style={{ color: "red" }}>
-          {Object.keys(props.user.answers).length + props.user.questions.length}
+          {Object.keys( user.answers).length +  user.questions.length}
         </b>
       </div>
-      <div>Questions asked: {props.user.questions.length}</div>
-      <div>Questions answered: {Object.keys(props.user.answers).length}</div>
+      <div>Questions asked: { user.questions.length}</div>
+      <div>Questions answered: {Object.keys( user.answers).length}</div>
       <p></p>
     </div>
   );

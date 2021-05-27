@@ -4,13 +4,13 @@ import React from "react";
 import User from "./User";
 
 function Dashboard(props) {
-
+  const {users} =props; 
   return (
     <div>
       <h3 className='center'>Users Ranking </h3>
       <ul className='center'>
-        {props.users
-          ? props.users.map((user) => (
+        {users
+          ? users.map((user) => (
               <li key={user.id}>
                 <User user={user} />
               </li>

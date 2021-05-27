@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 
 function NavBar(props) {
-  const { dispatch } = props;
+  const { dispatch, authedUserName, authedUseravatarURL } = props;
 
   const logoutClick = () => {
-    dispatch(setAuthedUser(""));
+    dispatch(setAuthedUser(null));
   };
   return (
     <nav className="nav">
@@ -47,17 +47,12 @@ function NavBar(props) {
         </li>
       </ul>
       <i>
-        {props.authedUserName === "" ? (
+        {authedUserName === "" ? (
           <div>Please Login </div>
         ) : (
           <div>
-            Welcome <b>{props.authedUserName} </b> ! &nbsp;
-            <img
-              src={props.authedUseravatarURL}
-              alt=""
-              width="40"
-              height="40"
-            ></img>
+            Welcome <b>{authedUserName} </b> ! &nbsp;
+            <img src={authedUseravatarURL} alt="" width="40" height="40"></img>
           </div>
         )}
       </i>

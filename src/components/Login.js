@@ -2,18 +2,18 @@ import "../index.css";
 import { connect } from "react-redux";
 import React from "react";
 import { setAuthedUser } from "../actions/authedUser";
+import { useHistory } from "react-router-dom";
 
 function Login(props) {
-  const { dispatch } = props;
-
+  const { dispatch, users } = props;
+  const history = useHistory();
   const changefunction = (e) => {
     e.preventDefault();
     if (e.target.value === "Select user:") return;
     dispatch(
-      setAuthedUser(
-        props.users.filter((user) => user.id === e.target.value)[0].id
-      )
+      setAuthedUser(users.filter((user) => user.id === e.target.value)[0].id)
     );
+    history.push("/home");
   };
 
   return (
@@ -22,8 +22,8 @@ function Login(props) {
       <select onChange={changefunction}>
         <option value="Select user:">Select user:</option>
 
-        {props.users !== undefined
-          ? props.users.map((user) => (
+        {users !== undefined
+          ? users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}
               </option>
