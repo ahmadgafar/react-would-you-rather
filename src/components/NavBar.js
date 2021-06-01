@@ -78,6 +78,7 @@ const mapStateToProps = ({ authedUser, users }) => {
       authedUserName: "",
       authedUseravatarURL: "",
     };
+  else return {};
 };
 
 export default connect(mapStateToProps)(NavBar);

@@ -43,7 +43,8 @@ function mapStateToProps({ users }) {
           Object.keys(a.answers).length -
           (b.questions.length + Object.keys(b.answers).length)
       ),
-    };
+    }
+  else return {};
 }
 
 export default connect(mapStateToProps)(Login);

@@ -90,7 +90,7 @@ function mapStateToProps({ authedUser, users, questions }) {
       unansweredQuestions: unansweredQuestions,
       authedUser,
     };
-  }
+  } else return {};
 }
 
 export default connect(mapStateToProps)(Home);

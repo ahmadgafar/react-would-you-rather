@@ -64,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
     const avatarURL = users[question.author].avatarURL;
     return { authedUser, question, avatarURL, answered };
   }
+  else return {};
 };
 
 export default withRouter(connect(mapStateToProps)(QuestionAnswer));

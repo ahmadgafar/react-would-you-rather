@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 function QuestionView(props) {
-  let {answered} = props
+  let { answered } = props;
   if (props.question) {
     let option1_percentage =
       (props.question["optionOne"].votes.length /
@@ -44,7 +44,7 @@ function QuestionView(props) {
           </div>
           <p></p>
           <div>
-            {props.question["optionTwo"].text} {" "}
+            {props.question["optionTwo"].text}{" "}
             {option2_percentage >= 50 ? (
               <b style={{ color: "green" }}> {option2_percentage} % </b>
             ) : (
@@ -73,7 +73,7 @@ const mapStateToProps = (state, ownProps) => {
           }
         }
     return { authedUser, question, answered };
-  }
+  } else return {};
 };
 
 export default withRouter(connect(mapStateToProps)(QuestionView));
