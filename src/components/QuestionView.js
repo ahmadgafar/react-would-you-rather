@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { render } from "@testing-library/react";
 
 function QuestionView(props) {
+  let {answered} = props
   if (props.question) {
     let option1_percentage =
       (props.question["optionOne"].votes.length /
@@ -24,7 +24,13 @@ function QuestionView(props) {
       border: "2px solid green", // it is not work.
     };
     return (
-      <Link to={`/question/${props.question.id}`}>
+      <Link
+        to={{
+          pathname: `/question/${props.question.id}`,
+          state: { answered },
+        }}
+      >
+        {" "}
         <div>
           {/* {props.user.id} */}
           <b>{props.question.author}</b> asked: would you rather ?<p></p>
@@ -38,7 +44,7 @@ function QuestionView(props) {
           </div>
           <p></p>
           <div>
-            {props.question["optionTwo"].text} with{" "}
+            {props.question["optionTwo"].text} {" "}
             {option2_percentage >= 50 ? (
               <b style={{ color: "green" }}> {option2_percentage} % </b>
             ) : (
@@ -54,14 +60,19 @@ function QuestionView(props) {
 
 const mapStateToProps = (state, ownProps) => {
   const { authedUser, questions } = state;
-  let { question } = ownProps;
+  let { question, answered } = ownProps;
 
   if (authedUser !== null && JSON.stringify(questions) !== "{}") {
     if (ownProps.match)
       if (ownProps.match.params)
-        if (ownProps.match.params.id)
+        if (ownProps.match.params.id) {
           question = questions[ownProps.match.params.id];
-    return { authedUser, question };
+
+          if (ownProps.location.state) {
+            ownProps.answered = ownProps.location.state.answered;
+          }
+        }
+    return { authedUser, question, answered };
   }
 };
 

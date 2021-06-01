@@ -46,14 +46,14 @@ function Home(props) {
                 ) : (
                   unansweredQuestions.map((question) => (
                     <li key={question[0]}>
-                      <QuestionBase answered={true} question={question[1]} />
+                      <QuestionBase answered={false} question={question[1]} />
                     </li>
                   ))
                 )
               ) : (
                 answeredQuestions.map((question) => (
                   <li key={question[0]}>
-                    <QuestionBase answered={false} question={question[1]} />
+                    <QuestionBase answered={true} question={question[1]} />
                   </li>
                 ))
               )}

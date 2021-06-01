@@ -5,7 +5,6 @@ import { handleInitialData } from "../actions/shared";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import NewQuestion from "./NewQuestion";
-import QuestionAnswer from "./QuestionAnswer";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router,Route } from "react-router-dom";
 import Home from "./Home";

@@ -6,17 +6,23 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 function QuestionAnswer(props) {
-  const { dispatch, avatarURL } = props;
+  let { dispatch, avatarURL, answered } = props;
+
   if (props.question) {
     const handleClick = (e, temp) => {
       e.preventDefault();
-      console.log(e.target.value);
       dispatch(
         answerQuestion(props.authedUser, props.question.id, e.target.value)
       );
+      props.handler(true);
     };
     return (
-      <Link to={`/question/${props.question.id}`}>
+      <Link
+        to={{
+          pathname: `/question/${props.question.id}`,
+          state: { answered },
+        }}
+      >
         <div>
           {avatarURL ? (
             <div>
@@ -44,16 +50,19 @@ function QuestionAnswer(props) {
 
 const mapStateToProps = (state, ownProps) => {
   const { authedUser, questions, users } = state;
-  let { question } = ownProps;
+  let { question, answered } = ownProps;
 
   if (authedUser !== null && JSON.stringify(questions) !== "{}") {
     if (ownProps.match)
       if (ownProps.match.params)
-        if (ownProps.match.params.id)
+        if (ownProps.match.params.id) {
           question = questions[ownProps.match.params.id];
-    console.log(ownProps);
+          if (ownProps.location.state) {
+            answered = ownProps.location.state.answered;
+          }
+        }
     const avatarURL = users[question.author].avatarURL;
-    return { authedUser, question, avatarURL };
+    return { authedUser, question, avatarURL, answered };
   }
 };
 

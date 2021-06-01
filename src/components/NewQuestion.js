@@ -13,7 +13,7 @@ function NewQuestion(props) {
     if (option1 === "" || option2 === "") {
       alert("please makes sure to put answers");
     } else {
-      console.log(dispatch(saveQuestion(option1, option2, authedUser)));
+      dispatch(saveQuestion(option1, option2, authedUser));
       setOption1("");
       setOption2("");
       alert("questions added");

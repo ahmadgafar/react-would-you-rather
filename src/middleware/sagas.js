@@ -4,7 +4,6 @@ import {
   answerQuestionApi,
   saveQuestionApi,
 } from "../utils/api";
-import { setAuthedUser } from "../actions/authedUser";
 import { receiveUsers } from "../actions/users";
 import {
   receiveQuestions,
@@ -15,7 +14,6 @@ import {
 } from "../actions/questions";
 import { FETCH_DATA_REQUESTED } from "../actions/shared";
 
-const AUTHED_ID = "tylermcginnis";
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* fetchDataSaga() {
@@ -23,7 +21,6 @@ function* fetchDataSaga() {
     const { users, questions } = yield call(getInitialDataApi);
     yield put(receiveUsers(users));
     yield put(receiveQuestions(questions));
-    yield put(setAuthedUser(AUTHED_ID));
   } catch (e) {
     yield put({ type: "FETCH_DATA_FAILED", message: e.message });
   }
