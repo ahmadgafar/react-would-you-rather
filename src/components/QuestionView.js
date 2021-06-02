@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 function QuestionView(props) {
-  let { answered } = props;
   if (props.question) {
     let option1_percentage =
       (props.question["optionOne"].votes.length /
@@ -27,7 +26,7 @@ function QuestionView(props) {
       <Link
         to={{
           pathname: `/question/${props.question.id}`,
-          state: { answered },
+          state: { answered: true },
         }}
       >
         {" "}
@@ -37,18 +36,34 @@ function QuestionView(props) {
           <div style={option1_style}>
             {props.question["optionOne"].text}{" "}
             {option1_percentage >= 50 ? (
-              <b style={{ color: "green" }}> {option1_percentage} % </b>
+              <b style={{ color: "green" }}>
+                {" "}
+                {option1_percentage} % with{" "}
+                {props.question["optionOne"].votes.length} vote
+              </b>
             ) : (
-              <b style={{ color: "red" }}> {option1_percentage} % </b>
+              <b style={{ color: "red" }}>
+                {" "}
+                {option1_percentage} % with{" "}
+                {props.question["optionOne"].votes.length} vote
+              </b>
             )}
           </div>
           <p></p>
           <div>
             {props.question["optionTwo"].text}{" "}
             {option2_percentage >= 50 ? (
-              <b style={{ color: "green" }}> {option2_percentage} % </b>
+              <b style={{ color: "green" }}>
+                {" "}
+                {option2_percentage} % with{" "}
+                {props.question["optionTwo"].votes.length} vote{" "}
+              </b>
             ) : (
-              <b style={{ color: "red" }}> {option2_percentage} % </b>
+              <b style={{ color: "red" }}>
+                {" "}
+                {option2_percentage} % with{" "}
+                {props.question["optionTwo"].votes.length} vote{" "}
+              </b>
             )}
           </div>
           <p></p>
@@ -60,19 +75,15 @@ function QuestionView(props) {
 
 const mapStateToProps = (state, ownProps) => {
   const { authedUser, questions } = state;
-  let { question, answered } = ownProps;
+  let { question } = ownProps;
 
   if (authedUser !== null && JSON.stringify(questions) !== "{}") {
     if (ownProps.match)
       if (ownProps.match.params)
         if (ownProps.match.params.id) {
           question = questions[ownProps.match.params.id];
-
-          if (ownProps.location.state) {
-            ownProps.answered = ownProps.location.state.answered;
-          }
         }
-    return { authedUser, question, answered };
+    return { authedUser, question };
   } else return {};
 };
 

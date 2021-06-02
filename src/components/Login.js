@@ -8,16 +8,16 @@ function Login(props) {
   const { dispatch, users } = props;
   const history = useHistory();
 
-  console.log(props);
-
   const changefunction = (e) => {
     e.preventDefault();
     if (e.target.value === "Select user:") return;
     dispatch(
       setAuthedUser(users.filter((user) => user.id === e.target.value)[0].id)
     );
+    console.log(props);
 
-    if (props.location.state === undefined) history.push("/");
+    console.log(window.history.length);
+    if (history.length <= 2) history.push('/');
     else history.goBack();
   };
 

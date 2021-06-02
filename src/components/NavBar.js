@@ -33,7 +33,7 @@ function NavBar(props) {
           <NavLink
             to={{
               pathname: "/login",
-              state: { from: "app" },
+              state: { test: "app" },
             }}
             exact
             activeClassName="active"
