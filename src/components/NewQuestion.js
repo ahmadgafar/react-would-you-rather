@@ -1,7 +1,7 @@
 import { saveQuestion } from "../actions/questions";
 import "../index.css";
 import { connect } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 function NewQuestion(props) {
@@ -23,15 +23,21 @@ function NewQuestion(props) {
     }
   };
 
-  const handleNoAuthedUser = () => {
-    alert("kindly login to access the website");
-    history.push("/login");
-  };
+
+  useEffect(() => {
+
+    const handleNoAuthedUser = () => {
+      alert("kindly login to access the website");
+      history.push("/login");
+    };
+
+    if (authedUser == null) handleNoAuthedUser();
+  }, [authedUser, history]);
 
   return (
     <div>
       {authedUser == null ? (
-        handleNoAuthedUser()
+        " "
       ) : (
         <div>
           <div>

@@ -1,6 +1,6 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import User from "./User";
 import { useHistory } from "react-router-dom";
 
@@ -8,14 +8,19 @@ function Dashboard(props) {
   const { users, authedUser } = props;
   const history = useHistory();
 
-  const handleNoAuthedUser = () => {
-    alert("kindly login to access the website");
-    history.push("/login");
-  };
+  useEffect(() => {
+
+    const handleNoAuthedUser = () => {
+      alert("kindly login to access the website");
+      history.push("/login");
+    };
+    if (authedUser == null) handleNoAuthedUser();
+  }, [authedUser, history]);
+
   return (
     <div>
       {authedUser == null ? (
-        handleNoAuthedUser()
+        " "
       ) : (
         <div>
           <h3 className="center">Users Ranking </h3>

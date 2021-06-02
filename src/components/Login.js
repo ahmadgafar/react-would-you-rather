@@ -17,7 +17,7 @@ function Login(props) {
     console.log(props);
 
     console.log(window.history.length);
-    if (history.length <= 2) history.push('/');
+    if (history.length <= 2) history.push("/");
     else history.goBack();
   };
 

@@ -30,14 +30,7 @@ function NavBar(props) {
         </li>
 
         <li>
-          <NavLink
-            to={{
-              pathname: "/login",
-              state: { test: "app" },
-            }}
-            exact
-            activeClassName="active"
-          >
+          <NavLink to="/login" exact activeClassName="active">
             Login
           </NavLink>
         </li>

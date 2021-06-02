@@ -1,6 +1,6 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React from "react";
+import React, {useEffect} from "react";
 import { answerQuestion } from "../actions/questions";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -9,7 +9,13 @@ import { useHistory } from "react-router-dom";
 function QuestionAnswer(props) {
   let { dispatch, avatarURL, error } = props;
   const history = useHistory();
-  if (error) history.push("/error");
+
+
+  useEffect(() => {
+    if (error) history.push("/error");
+  }, [error,history]);
+
+
   if (props.question) {
     const handleClick = (e, temp) => {
       e.preventDefault();

@@ -1,6 +1,6 @@
 import "../index.css";
 import { connect } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QuestionBase from "./QuestionBase";
 import { useHistory } from "react-router-dom";
 
@@ -19,15 +19,20 @@ function Home(props) {
     else setcurrentView(UN_ANSWERED_QUESTIONS);
   };
 
+
+  useEffect(() => {
+
   const handleNoAuthedUser = () => {
     alert("kindly login to access the website");
     history.push("/login");
   };
 
+    if (authedUser == null) handleNoAuthedUser();
+  }, [authedUser, history]);
   return (
     <div>
       {authedUser == null ? (
-        handleNoAuthedUser()
+        " "
       ) : (
         <div>
           {" "}
