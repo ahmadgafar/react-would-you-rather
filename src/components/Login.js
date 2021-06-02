@@ -7,13 +7,18 @@ import { useHistory } from "react-router-dom";
 function Login(props) {
   const { dispatch, users } = props;
   const history = useHistory();
+
+  console.log(props);
+
   const changefunction = (e) => {
     e.preventDefault();
     if (e.target.value === "Select user:") return;
     dispatch(
       setAuthedUser(users.filter((user) => user.id === e.target.value)[0].id)
     );
-    history.push("/home");
+
+    if (props.location.state === undefined) history.push("/");
+    else history.goBack();
   };
 
   return (
@@ -43,7 +48,7 @@ function mapStateToProps({ users }) {
           Object.keys(a.answers).length -
           (b.questions.length + Object.keys(b.answers).length)
       ),
-    }
+    };
   else return {};
 }
 

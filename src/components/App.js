@@ -22,7 +22,7 @@ function App(props) {
         <div>
           <Route path="/" component={NavBar} />
           <Route path="/login" component={Login} />
-          <Route path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/add" component={NewQuestion} />
           <Route path="/leaderboard" component={Dashboard} />
           <Route path='/question/:id' component={QuestionBase} />

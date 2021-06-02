@@ -14,12 +14,12 @@ function NavBar(props) {
     <nav className="nav">
       <ul>
         <li>
-          <NavLink to="/home" exact activeClassName="active">
+          <NavLink to="/" exact activeClassName="active">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/leaderboard" exact activeClassName="active">
+          <NavLink to="/leaderboard" activeClassName="active">
             Leaderboard
           </NavLink>
         </li>
@@ -30,7 +30,14 @@ function NavBar(props) {
         </li>
 
         <li>
-          <NavLink to="/login" exact activeClassName="active">
+          <NavLink
+            to={{
+              pathname: "/login",
+              state: { from: "app" },
+            }}
+            exact
+            activeClassName="active"
+          >
             Login
           </NavLink>
         </li>
